@@ -1,0 +1,1 @@
+# Problema-de-Localizac-o-com-Cobertura-Parcial
