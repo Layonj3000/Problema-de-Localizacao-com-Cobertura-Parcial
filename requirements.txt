@@ -1,0 +1,5 @@
+numpy>=1.26
+pandas>=2.1
+docplex>=2.25.236
+gurobipy>=11.0.0
+openpyxl>=3.1
