@@ -78,8 +78,8 @@ python main.py --inst_dir instances --out_dir results --time_limit 3600
 
 ## 🔬 Configuração dos Experimentos
 
-- **Raios de cobertura testados:** 5.5, 5.75, 6.0, 6.25
-- **Percentual de demanda mínima:** 50%
+- **Raios de cobertura testados:** 3.25, 3.5, 3.75, 4,4.25
+- **Percentual de demanda mínima:** 70%
 - **Solvers:** CPLEX e Gurobi
 - **Tempo limite:** 1 hora por instância
 
@@ -109,6 +109,12 @@ Os resultados são salvos em:
 
 ### Instâncias Grandes
 ![Instâncias Grandes](assets/grandes.png)
+
+### Instâncias Enormes
+![Instâncias Grandes](assets/enormes.png)
+
+### Instâncias Gigantes
+![Instâncias Grandes](assets/gigantes.png)
 
 ## 📦 Dependências
 
