@@ -41,7 +41,7 @@ O PLCP é um problema de otimização onde o objetivo é minimizar o custo de in
 
 1. Clone o repositório:
 ```bash
-git clone <https://github.com/Layonj3000/Problema-de-Localizacao-com-Cobertura-Parcial.git>
+git clone https://github.com/Layonj3000/Problema-de-Localizacao-com-Cobertura-Parcial.git
 cd Problema-de-Localizacao-com-Cobertura-Parcial
 ```
 
