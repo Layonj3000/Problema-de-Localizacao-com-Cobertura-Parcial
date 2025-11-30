@@ -18,21 +18,6 @@ def solve_gurobi(
     verbose: bool = False,
     outdir: str = "results/models"
 ) -> Dict[str, object]:
-    """
-    Resolve o PLCP com Gurobi (minimiza custo de instalação).
-
-    Args:
-        inst_name: nome da instância
-        inst: dados da instância
-        A: matriz de cobertura
-        D_min: demanda mínima a ser coberta
-        time_limit: tempo limite em segundos
-        verbose: modo detalhado
-        outdir: pasta de saída para .lp
-
-    Returns:
-        Dicionário com LB, UB, GAP, TIME, y, z
-    """
     os.makedirs(outdir, exist_ok=True)
     n_fac, n_cli = inst["n_fac"], inst["n_cli"]
     f_costs = [f[3] for f in inst["facilities"]]

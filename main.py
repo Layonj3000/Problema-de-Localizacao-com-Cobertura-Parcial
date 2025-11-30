@@ -9,8 +9,8 @@ from solver_gurobi import solve_gurobi
 from solver_cplex import solve_cplex
 from utils import write_solution_txt, save_results_xlsx
 
-R_LIST = [5.5, 5.75, 6.0, 6.25]
-D_PERCENT = 0.5
+R_LIST = [3.25, 3.5, 3.75, 4,4.25]
+D_PERCENT = 0.7
 
 def run_all(inst_dir: str, out_dir: str, time_limit: int = 3600):
     records = []
@@ -24,7 +24,7 @@ def run_all(inst_dir: str, out_dir: str, time_limit: int = 3600):
         D_min = D_PERCENT * total_demand
 
         for R in R_LIST:
-            print(f"\n[{inst_name}] Rodando R={R} D=50% ...")
+            print(f"\n[{inst_name}] Rodando R={R} D={D_PERCENT} ...")
             A = build_coverage_matrix(inst, R)
 
             # GUROBI
