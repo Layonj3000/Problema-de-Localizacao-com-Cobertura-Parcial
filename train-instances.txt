@@ -1,0 +1,3 @@
+instances/GRID_PSCLP_n100_m1000_d1_100_f10_100_s1.dat
+instances/GRID_PSCLP_n100_m5000_d1_100_f10_100_s1.dat
+instances/GRID_PSCLP_n100_m10000_d1_100_f10_100_s1.dat
