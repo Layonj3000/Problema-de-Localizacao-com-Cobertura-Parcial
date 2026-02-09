@@ -8,7 +8,7 @@ from parser_plcp import read_opl_dat, build_coverage_matrix
 from Solvers.solver_gurobi import solve_gurobi
 from Solvers.solver_cplex import solve_cplex
 from Solvers.solver_sa import solve_sa
-from utils import write_solution_txt, save_results_xlsx
+from Solvers.utils import write_solution_txt, save_results_xlsx
 
 R_LIST = [3.25, 3.5, 3.75, 4,4.25]
 D_PERCENT = 0.7
@@ -29,19 +29,19 @@ def run_all(inst_dir: str, out_dir: str, time_limit: int = 3600):
             A = build_coverage_matrix(inst, R)
 
             # GUROBI
-            #res_g = solve_gurobi(inst_name, inst, A, D_min, time_limit)
-            #write_solution_txt(inst_name, R, "GUROBI", res_g["y"], res_g["z"], f"{out_dir}/solutions")
-            #records.append({"Instância": inst_name, "Solver": "GUROBI", "R": R, **{k: res_g[k] for k in ["LB","UB","GAP","TIME"]}})
+            res_g = solve_gurobi(inst_name, inst, A, D_min, time_limit)
+            write_solution_txt(inst_name, R, "GUROBI", res_g["y"], res_g["z"], f"{out_dir}/solutions")
+            records.append({"Instância": inst_name, "Solver": "GUROBI", "R": R, **{k: res_g[k] for k in ["LB","UB","GAP","TIME"]}})
 
             # CPLEX
-            #res_c = solve_cplex(inst_name, inst, A, D_min, time_limit)
-            #write_solution_txt(inst_name, R, "CPLEX", res_c["y"], res_c["z"], f"{out_dir}/solutions")
-            #records.append({"Instância": inst_name, "Solver": "CPLEX", "R": R, **{k: res_c[k] for k in ["LB","UB","GAP","TIME"]}})
+            res_c = solve_cplex(inst_name, inst, A, D_min, time_limit)
+            write_solution_txt(inst_name, R, "CPLEX", res_c["y"], res_c["z"], f"{out_dir}/solutions")
+            records.append({"Instância": inst_name, "Solver": "CPLEX", "R": R, **{k: res_c[k] for k in ["LB","UB","GAP","TIME"]}})
 
             #Simulated Annealing
-            res_sa = solve_sa(inst_name, inst, A, D_min, time_limit)
-            write_solution_txt(inst_name, R, "SA", res_sa["y"], res_sa["z"], f"{out_dir}/solutions")
-            records.append({"Instância": inst_name,"Solver": "SA","R": R,"FO": res_sa["FO"],"TIME": res_sa["TIME"]})
+            #res_sa = solve_sa(inst_name, inst, A, D_min, time_limit)
+            #write_solution_txt(inst_name, R, "SA", res_sa["y"], res_sa["z"], f"{out_dir}/solutions")
+            #records.append({"Instância": inst_name,"Solver": "SA","R": R,"FO": res_sa["FO"],"TIME": res_sa["TIME"]})
 
     save_results_xlsx(records, f"{out_dir}/results.xlsx")
 

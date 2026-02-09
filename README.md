@@ -1,6 +1,10 @@
 # 📍 Problema de Localização com Cobertura Parcial (PLCP)
 
-Este projeto implementa soluções para o Problema de Localização com Cobertura Parcial usando os solvers CPLEX e Gurobi.
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Solvers](https://img.shields.io/badge/Solvers-CPLEX%20|%20Gurobi%20|%20Simulated%20Annealing-orange)
+![Status](https://img.shields.io/badge/Status-Finalizado-green)
+
+Este projeto implementa soluções para o Problema de Localização com Cobertura Parcial (PLCP) utilizando métodos exatos (**CPLEX e Gurobi**) e uma **Meta-heurística (Simulated Annealing)**.
 
 ## 📋 Descrição do Problema
 
@@ -19,22 +23,29 @@ O PLCP é um problema de otimização onde o objetivo é minimizar o custo de in
 ## 📁 Estrutura do Projeto
 
 ```
-├── assets/            # Imagens das tabelas de resultados
-├── instances/         # Instâncias de teste no formato .dat
-├── plcp_env/          # Ambiente virtual Python
-├── results/           # Resultados dos experimentos
-│   ├── models/        # Modelos exportados (.lp)
-│   ├── solutions/     # Soluções encontradas (.txt)
-│   └── results.xlsx   # Planilha com resultados consolidados
-├── .gitignore         # Arquivos ignorados pelo Git
-├── main.py            # Script principal
-├── parser_plcp.py     # Parser para instâncias .dat
-├── README.md          # Documentação do projeto
-├── requirements.txt   # Dependências do projeto
-├── solver_cplex.py    # Implementação com CPLEX
-├── solver_gurobi.py   # Implementação com Gurobi
-├── Tabelas.xlsx       # Planilha com tabelas com os resultados organizados
-└── utils.py           # Utilitários para salvar resultados
+├── assets/                  # Imagens das tabelas de resultados
+├── instances/               # Instâncias de teste no formato .dat
+├── irace_tuning/            # Logs e configurações do iRace
+├── Resultado_Parte1/        # Resultados dos experimentos(Parte 1)
+│   ├── models/              # Modelos exportados (.lp)
+│   ├── solutions/           # Soluções encontradas (.txt)
+│   ├── Tabelas-Final.xlsx   # Planilha com tabelas com os resultados organizados
+├── Resultado_Parte2/        # Resultados dos experimentos(Parte 2)
+│   ├── solutions/           # Soluções encontradas (.txt)
+│   ├── Tabela1.xlsx         # Planilha com a tabela de calibração de parâmetros via iRace
+│   ├── Tabela2.xlsx         # Planilha com tabelas com os resultados obtidos pelo método heurístico
+│   ├── Tabela3.xlsx         # Planilha com tabelas com a comparação dos resultado
+├── Solvers/                 # Código Fonte
+│   ├── solver_sa.py         # Simulated Annealing 
+│   ├── solver_cplex.py      # Solver CPLEX
+│   ├── solver_gurobi.py     # Solver Gurobi
+│   └── utils.py             # Utilitários
+├── .gitignore               # Arquivos ignorados pelo Git
+├── main_Parte1.py           # Script principal para a parte 1(Gurobi e CPLEX)
+├── main_Parte2.py           # Script principal para a parte 2(Simulated Annealing)
+├── parser_plcp.py           # Parser para instâncias .dat
+├── README.md                # Documentação do projeto
+├── requirements.txt         # Dependências do projeto
 ```
 
 ## ⚙️ Instalação
@@ -60,28 +71,34 @@ pip install -r requirements.txt
 
 ## 🚀 Uso
 
-### 🔄 Execução Completa
-Para executar todas as instâncias com ambos os solvers:
+### 🔄 Execução Completa com Gurobi e CPLEX
+Para executar todas as instâncias com ambos os solvers(Gurobi e CPLEX):
 
 ```bash
-python main.py
+python main_Parte1.py 
 ```
 
 ### ⚡ Parâmetros Opcionais
 ```bash
-python main.py --inst_dir instances --out_dir results --time_limit 3600
+python main_Parte1.py --inst_dir instances --out_dir results --time_limit 3600
 ```
 
 - `--inst_dir`: Diretório das instâncias (padrão: "instances")
 - `--out_dir`: Diretório de saída (padrão: "results")
 - `--time_limit`: Tempo limite em segundos (padrão: 3600)
 
+### 🔄 Execução Completa com Simulated Annealing
+Para executar todas as instâncias com Meta-heurística (Simulated Annealing):
+
+```bash
+python main_Parte2.py 
+```
+
 ## 🔬 Configuração dos Experimentos
 
 - **Raios de cobertura testados:** 3.25, 3.5, 3.75, 4,4.25
 - **Percentual de demanda mínima:** 70%
-- **Solvers:** CPLEX e Gurobi
-- **Tempo limite:** 1 hora por instância
+- **Tempo limite:** 1 hora por instância(CPLEX e Gurobi) e 5 minutos por instância(Simulated Annealing)
 
 ## 📄 Formato das Instâncias
 
@@ -92,7 +109,7 @@ F <id> <x> <y> <cost>
 C <id> <x> <y> <demand>
 ```
 
-## 📊 Resultados
+## 📊 Resultados CPLEX e Gurobi.
 
 Os resultados são salvos em:
 - **results.xlsx**: Planilha consolidada com LB, UB, GAP e tempo para cada configuração
@@ -110,12 +127,69 @@ Os resultados são salvos em:
 ### Instâncias Grandes
 ![Instâncias Grandes](assets/grandes.png)
 
-### Instâncias Enormes
-![Instâncias Grandes](assets/enormes.png)
+## 🧬 Resultados da Meta-heurística e Calibração (iRace)
 
-### Instâncias Gigantes
-![Instâncias Grandes](assets/gigantes.png)
+Foi implementada a meta-heurística **Simulated Annealing (SA)**.
 
+### Calibração de Parâmetros
+Para garantir o melhor desempenho, os parâmetros do algoritmo foram calibrados utilizando o pacote **iRace** (Iterated Racing for Automatic Algorithm Configuration).
+
+Foram utilizadas **3 instâncias de calibração** (1 pequena, 1 média e 1 grande) para definir os melhores valores, conforme apresentado abaixo:
+
+#### Tabela 1 – Calibração de parâmetros via iRace
+![Tabela 1 - Calibração iRace](assets/Tabela1.png)
+
+---
+
+## 📊 Metodologia Experimental
+
+Os experimentos foram conduzidos seguindo as regras:
+1.  **Execuções:** A meta-heurística foi executada **3 vezes** para cada instância com sementes aleatórias distintas.
+2.  **Tempo Limite:** 5 minutos (300 segundos) por execução.
+3.  **Comparação:** Os resultados foram confrontados com os ótimos globais obtidos pelo CPLEX/Gurobi.
+
+### Resultados da Meta-heurística
+A tabela abaixo apresenta o desempenho estatístico do Simulated Annealing.
+
+### Tabela 2 – Resultados obtidos pelo método heurístico
+
+### Instâncias Pequenas
+![Instâncias Pequenas](assets/Tabela2_Pequena.png)
+
+### Instâncias Médias
+![Instâncias Médias](assets/Tabela2_Media.png)
+
+### Instâncias Grandes
+![Instâncias Grandes](assets/Tabela2_Grande.png)
+
+**Legenda das Métricas:**
+* **Melhor FO:** A melhor Função Objetivo obtida nas 3 execuções.
+* **FO Média:** Média aritmética das 3 FOs.
+* **Desvio (%):** $\frac{|FO_{Media} - FO_{Melhor}|}{FO_{Melhor}} \times 100$
+* **Tempo Médio:** Média do tempo total de execução.
+* **T. Melhor:** Média do tempo em que a melhor solução foi encontrada durante a busca.
+
+---
+
+### Comparativo: Exatos vs. Heurística
+Esta tabela compara a qualidade da solução e o tempo computacional entre os solvers comerciais e a meta-heurística desenvolvida.
+
+### Tabela 3 – Comparação dos resultados
+
+### Instâncias Pequenas
+![Instâncias Pequenas](assets/Tabela3_Pequenas.png)
+
+### Instâncias Médias
+![Instâncias Médias](assets/Tabela3_Media.png)
+
+### Instâncias Grandes
+![Instâncias Grandes](assets/Tabela3_Grande.png)
+
+**Cálculo das Diferenças (Gap em relação ao Solver):**
+$$Dif\_X = \frac{(FO\_X - FO\_MH)}{FO\_X} \times 100$$
+*Onde $X$ representa o solver (CPLEX ou GUROBI).*
+
+---
 ## 📦 Dependências
 
 - Python=3.10
