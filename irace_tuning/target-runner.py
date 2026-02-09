@@ -1,7 +1,7 @@
 import argparse
 import random
 from parser_plcp import read_opl_dat, build_coverage_matrix
-from solver_sa import solve_sa
+from Solvers.solver_sa import solve_sa
 
 def main():
     parser = argparse.ArgumentParser()

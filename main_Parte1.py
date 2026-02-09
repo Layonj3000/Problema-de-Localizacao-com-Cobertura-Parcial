@@ -5,9 +5,9 @@ Roda todas as instâncias do PLCP com CPLEX e Gurobi.
 """
 import os, argparse
 from parser_plcp import read_opl_dat, build_coverage_matrix
-from solver_gurobi import solve_gurobi
-from solver_cplex import solve_cplex
-from solver_sa import solve_sa
+from Solvers.solver_gurobi import solve_gurobi
+from Solvers.solver_cplex import solve_cplex
+from Solvers.solver_sa import solve_sa
 from utils import write_solution_txt, save_results_xlsx
 
 R_LIST = [3.25, 3.5, 3.75, 4,4.25]
