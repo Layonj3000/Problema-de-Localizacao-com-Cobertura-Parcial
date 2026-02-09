@@ -3,6 +3,8 @@ targetRunnerLauncher = "python3"
 
 trainInstancesFile = "train-instances.txt"
 
-maxExperiments = 150
+maxExperiments = 200
+
+parallel = 4
+
 logFile = "irace.log"
-parallel = 1

@@ -1,0 +1,5 @@
+Instancia: GRID_PSCLP_n100_m100000_d1_100_f10_100_s1
+Raio (R): 4.25
+Melhor FO: 1187.0
+Tempo Total: 300.0350
+Facilidades Abertas (y): [0, 8, 11, 19, 21, 22, 30, 35, 38, 39, 40, 41, 46, 55, 72, 81, 84, 85, 87, 89, 95]
