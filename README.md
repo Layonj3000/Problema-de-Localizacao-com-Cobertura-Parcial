@@ -18,7 +18,7 @@ O PLCP é um problema de otimização onde o objetivo é minimizar o custo de in
 - **Função objetivo:** Minimizar o custo total de instalação das facilidades
 - **Restrições:**
   - Cobertura: Um cliente só pode ser coberto se houver pelo menos uma facilidade instalada dentro do raio de cobertura
-  - Demanda mínima: A demanda total coberta deve ser pelo menos 50% da demanda total
+  - Demanda mínima: A demanda total coberta deve ser pelo menos 70% da demanda total
 
 ## 📁 Estrutura do Projeto
 
