@@ -2,7 +2,6 @@
 solver_sa.py
 ------------
 Meta-heurística Simulated Annealing (SA) para o PLCP.
-Versão SUPER OTIMIZADA com Avaliação Delta (Incremental).
 """
 
 from __future__ import annotations
@@ -32,11 +31,10 @@ def solve_sa(
     f_costs = [f[3] for f in inst["facilities"]]
     d_dem = [c[3] for c in inst["clients"]]
 
-    # --- 1. CONSTRUÇÃO DA ADJACÊNCIA (Tuplas são mais rápidas que sets para iterar) ---
     # adj[i] = tupla de índices dos clientes que a facilidade i cobre
     adj = []
     for i in range(n_fac):
-        # Cria lista temporária e converte para tupla (imutável e rápida)
+        # Cria lista temporária e converte para tupla 
         covered_by_i = tuple([j for j in range(n_cli) if A[i][j] == 1])
         adj.append(covered_by_i)
     
@@ -74,7 +72,7 @@ def solve_sa(
     rand_randint = random.randint
     math_exp = math.exp
 
-    # --- 3. LOOP PRINCIPAL OTIMIZADO ---
+    # --- 3. LOOP PRINCIPAL ---
     while (time.time() - t0 < time_limit) and (T > 0.01):
         
         for _ in range(beta):
@@ -142,7 +140,7 @@ def solve_sa(
                 # Atualiza melhor solução
                 if current_cost < best_cost:
                     best_cost = current_cost
-                    best_y = y_indices.copy() # Aqui o copy é inevitável, mas é raro
+                    best_y = y_indices.copy() 
                     t_best = time.time() - t0
 
         # Resfriamento
